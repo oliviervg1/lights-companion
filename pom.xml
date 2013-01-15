@@ -1,0 +1,150 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- MAVEN ARTIFACT INFORMATION -->
+	<groupId>com.relayClient.raspi</groupId>
+	<artifactId>relay-control</artifactId>
+	<version>1.0.0</version>
+	<name>Raspberry Pi - Power Controller</name>
+	<description>Raspberry Pi - Power Controller</description>
+
+	<!-- ORGANIZATION -->
+	<organization>
+		<name>Olivier Van Goethem</name>
+		<url>http://www.van-goethem.co.uk</url>
+	</organization>
+
+	<!-- LICENSE -->
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<!-- SOURCE CONTROL -->
+	<scm>
+		<url>https://github.com/oliviervg1/relay-control.git</url>
+		<connection>scm:git@github.com:oliviervg1/relay-control.git</connection>
+	</scm>
+
+	<!-- ISSUE MANAGEMENT -->
+	<issueManagement>
+		<url>https://github.com/oliviervg1/relay-control/issues</url>
+		<system>github</system>
+	</issueManagement>
+
+	<!-- DEVELOPERS/CONTRIBUTORS -->
+	<developers>
+		<developer>
+			<name>Olivier Van Goethem</name>
+			<url>http://van-goethem.co.uk</url>
+			<organizationUrl>http://www.van-goethem.co.uk</organizationUrl>
+			<roles>
+				<role>owner</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<!-- BUILD PROPERTIES -->
+	<properties>
+
+		<!-- PROJECT ENCODING PROPERTIES -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- GITHUB PROPERTIES -->
+		<github.global.server>github</github.global.server>
+
+	</properties>
+	
+	<!-- DEPENDENCIES -->
+	<repositories>
+		<repository>
+			<id>oss-snapshots-repo</id>
+			<name>Sonatype OSS Maven Repository</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.pi4j</groupId>
+			<artifactId>pi4j-core</artifactId>
+			<version>0.0.5-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<!-- BUILD INSTRUCTIONS -->
+	<build>
+		<resources>
+			<resource>
+				<directory>${project.build.directory}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>LICENSE.txt</include>
+					<include>NOTICE.txt</include>
+					<include>README.md</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+
+			<!-- DEPLOY DOWNLOADABLE ARTIFACTS TO GITHUB -->
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>downloads-maven-plugin</artifactId>
+				<version>0.5</version>
+				<configuration>
+					<description>${project.version} build of the Power
+						Controller for the
+						Raspberry Pi</description>
+					<override>true</override>
+					<repositoryOwner>oliviervg1</repositoryOwner>
+					<repositoryName>relay-control</repositoryName>
+					<includeAttached>true</includeAttached>
+					<includes>
+						<include>relay-control*</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+			<!-- JAVA COMPILER -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<verbose>true</verbose>
+					<compilerVersion>1.7</compilerVersion>
+				</configuration>
+			</plugin>
+
+			<!-- INCLUDE SOURCE JAR -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
