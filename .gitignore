@@ -5,4 +5,7 @@
 *.war
 *.ear
 
+# Added #
+*.DS_Store
+.settings/
 [Tt]arget/
