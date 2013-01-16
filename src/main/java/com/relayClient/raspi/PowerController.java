@@ -39,17 +39,19 @@ public class PowerController
         // create a listener for the override switch
         overrideSwitch.addListener(new OverrideSwitchListener());
         
+        powerController.high();
+        
         while(true) {
             System.out.println("");
         	System.out.println("Turn Relay ON/OFF?");
   
 	        String event = System.console().readLine();
-	        
-	        if (event == "On" || event == "on") {
+	      	        
+	        if (event.equalsIgnoreCase("on")) {
 	        	powerController.high();
 	        }
 	        
-	        if (event == "Off" || event == "off") {
+	        if (event.equalsIgnoreCase("off")) {
 	        	powerController.low();
 	        }
         }
