@@ -7,6 +7,8 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.pi4j.io.gpio.trigger.GpioToggleStateTrigger;
 
 public class PowerController
@@ -33,7 +35,10 @@ public class PowerController
         // create a gpio toggle trigger on the override switch input pin; 
         // when the input is detected, toggle the power controller state
         overrideSwitch.addTrigger(new GpioToggleStateTrigger(PinState.HIGH, powerController));
-    
+        
+        // create a listener for the override switch
+        overrideSwitch.addListener(new OverrideSwitchListener());
+        
         while(true) {
             System.out.println("");
         	System.out.println("Turn Relay ON/OFF?");
@@ -41,21 +46,41 @@ public class PowerController
 	        String event = System.console().readLine();
 	        
 	        if (event == "On" || event == "on") {
-	        	turnOn();
+	        	powerController.high();
 	        }
 	        
 	        if (event == "Off" || event == "off") {
-	        	turnOff();
+	        	powerController.low();
 	        }
         }
     }
   
-    public void turnOn() {
-    	powerController.high();
-    }
+//    public void turnOn() {
+//    	powerController.high();
+//    }
+//    
+//    public void turnOff() {
+//    	powerController.low();
+//    }
     
-    public void turnOff() {
-    	powerController.low();
-    }
+    /**
+     * This listener class is invoked as a callback when a state change
+     * is detected on the override input switch (if implemented; optional)
+     * 
+     * @author Robert Savage
+     */
+    private class OverrideSwitchListener implements GpioPinListenerDigital
+    {
+        @Override
+        public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event)
+        {
+            if(event.getState().isHigh())
+            {
+                System.out.println("---------------------------------");
+                System.out.println("[OVERRIDE] POWER STATE TOGGLED");
+                System.out.println("---------------------------------");
+            }
+        }
+    }  
 }
         
