@@ -33,6 +33,21 @@ public class PowerController
         // create a gpio toggle trigger on the override switch input pin; 
         // when the input is detected, toggle the power controller state
         overrideSwitch.addTrigger(new GpioToggleStateTrigger(PinState.HIGH, powerController));
+    
+        while(true) {
+            System.out.println("");
+        	System.out.println("Turn Relay ON/OFF?");
+  
+	        String event = System.console().readLine();
+	        
+	        if (event == "On" || event == "on") {
+	        	turnOn();
+	        }
+	        
+	        if (event == "Off" || event == "off") {
+	        	turnOff();
+	        }
+        }
     }
   
     public void turnOn() {
