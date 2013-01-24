@@ -83,8 +83,8 @@
 		
 		<dependency>
   			<groupId>org.jmock</groupId>
-  			<artifactId>jmock-legacy</artifactId>
-  			<version>2.6.0</version>
+  			<artifactId>jmock-junit4</artifactId>
+  			<version>2.6.0-RC2</version>
 		</dependency>
 	</dependencies>
 
