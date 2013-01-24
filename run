@@ -1,0 +1,7 @@
+#
+# Script to build and run relay-control
+#
+
+mvn clean install
+cd target/
+sudo java -classpath classes:./'*' Runner
