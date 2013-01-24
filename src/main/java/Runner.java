@@ -1,5 +1,4 @@
 import com.relayClient.raspi.PowerController;
-import com.relayClient.raspi.Authenticator.AESKey;
 import com.relayClient.raspi.Authenticator.Authenticator;
 import com.relayClient.raspi.Authenticator.Password;
 
@@ -9,9 +8,10 @@ public class Runner {
         PowerController powerSocket = new PowerController();
         
         // authenticator to ensure secure access
-        Authenticator authentication = new Authenticator(new Password("password"), new AESKey("HomeAutomation12"));
+        Authenticator authentication = new Authenticator(new Password("HomeAutomation12"));
+        
         // PLACEHOLDER - will be moved client side
-        authentication.encryptPassword("password");
+        authentication.encryptPassword(new Password("HomeAutomation12"));
         
         while(true) {
         	if (authentication.isPasswordCorrect()) {
@@ -27,7 +27,10 @@ public class Runner {
        	        if (event.equalsIgnoreCase("off")) {
        	        	powerSocket.turnOff();
        	        }
-        	}    
+        	}
+        	else {
+        		System.err.println("Authentication password is incorrect!");
+        	}
         }
     }
 }

@@ -20,24 +20,26 @@ public class Authenticator {
 	private SecretKeySpec key;
 	
 	// Key has to be 16 bytes long!
-	public Authenticator(Password password, AESKey key) {
+	public Authenticator(Password password) {
 		this.password = password;
 		this.encryptedPassword = null;
 		this.initialisationVector = null;
-		if (key.getKey().getBytes().length == 16) { 
-			this.key = new SecretKeySpec(key.getKey().getBytes(), "AES");
+		if (password.getPassword().getBytes().length == 16) { 
+			this.key = new SecretKeySpec(password.getPassword().getBytes(), "AES");
 		}
 		else {
-			System.err.println("AES key has to be exactly 16 bytes long!");
+			System.err.println("Password has to be exactly 16 characters long!");
+			System.err.println("Password has been set to default: HomeAutomation12");
+			this.key = new SecretKeySpec("HomeAutomation12".getBytes(), "AES");
 		}
 	}
 
-	public void encryptPassword(String passwordToEncrypt) {
+	public void encryptPassword(Password passwordToEncrypt) {
 		try {
 			
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
-			encryptedPassword = cipher.doFinal(passwordToEncrypt.getBytes());
+			encryptedPassword = cipher.doFinal(passwordToEncrypt.getPassword().getBytes());
 			initialisationVector = cipher.getIV();
 		
 		} catch (NoSuchAlgorithmException e) {
@@ -58,6 +60,7 @@ public class Authenticator {
 		}
 	}
 	
+	// TODO change when building client
 	public boolean isPasswordCorrect() {
 		if (password.getPassword().equals(decryptString(getEncryptedData(), getInitialisationVector()))) {
 			return true;
