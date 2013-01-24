@@ -1,4 +1,4 @@
-package com.relayClient.raspi;
+package com.relayClient.raspi.Authenticator;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -11,25 +11,33 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+
 public class Authenticator {
 	
-	private byte[] encryptedData;
+	private Password password;
+	private byte[] encryptedPassword;
 	private byte[] initialisationVector;
 	private SecretKeySpec key;
 	
 	// Key has to be 16 bytes long!
-	public Authenticator(String key) {
-		this.encryptedData = null;
+	public Authenticator(Password password, AESKey key) {
+		this.password = password;
+		this.encryptedPassword = null;
 		this.initialisationVector = null;
-		this.key = new SecretKeySpec(key.getBytes(), "AES");
+		if (key.getKey().getBytes().length == 16) { 
+			this.key = new SecretKeySpec(key.getKey().getBytes(), "AES");
+		}
+		else {
+			System.err.println("AES key has to be exactly 16 bytes long!");
+		}
 	}
 
-	public void encryptString(String stringToEncrypt) {
+	public void encryptPassword(String passwordToEncrypt) {
 		try {
 			
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
-			encryptedData = cipher.doFinal(stringToEncrypt.getBytes());
+			encryptedPassword = cipher.doFinal(passwordToEncrypt.getBytes());
 			initialisationVector = cipher.getIV();
 		
 		} catch (NoSuchAlgorithmException e) {
@@ -50,7 +58,16 @@ public class Authenticator {
 		}
 	}
 	
-	public String decryptString(byte[] encryptedData, byte[] initialisationVector) {
+	public boolean isPasswordCorrect() {
+		if (password.getPassword().equals(decryptString(getEncryptedData(), getInitialisationVector()))) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private String decryptString(byte[] encryptedData, byte[] initialisationVector) {
 		byte[] unencryptedData = null;
 		byte[] iv = initialisationVector;
 		
@@ -83,13 +100,8 @@ public class Authenticator {
 		return new String(unencryptedData);
 	}
 	
-	public void reset() {
-		this.encryptedData = null;
-		this.initialisationVector = null;
-	}
-
 	public byte[] getEncryptedData() {
-		return encryptedData;
+		return encryptedPassword;
 	}
 
 	public byte[] getInitialisationVector() {

@@ -4,24 +4,25 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.relayClient.raspi.Authenticator;
+import com.relayClient.raspi.Authenticator.AESKey;
+import com.relayClient.raspi.Authenticator.Authenticator;
+import com.relayClient.raspi.Authenticator.Password;
 
 public class AuthenticatorTest {
 
 	@Test
-	public void successfulDecryption() {
-		String stringToEncrypt = "test-test";
-		Authenticator authenticator = new Authenticator("testtesttesttest");
-		authenticator.encryptString(stringToEncrypt);
-		assertTrue(stringToEncrypt.equals(authenticator.decryptString(authenticator.getEncryptedData(), authenticator.getInitialisationVector())));
+	public void correctPassword() {
+		String stringToEncrypt = "password1";
+		Authenticator authenticator = new Authenticator(new Password("password1"), new AESKey("testtesttesttest"));
+		authenticator.encryptPassword(stringToEncrypt);
+		assertTrue(authenticator.isPasswordCorrect());
 	}
 	
 	@Test
-	public void failedDecryption() {
-		String stringToEncrypt = "test-test";
-		Authenticator authenticator = new Authenticator("testtesttesttest");
-		authenticator.encryptString(stringToEncrypt);
-		assertFalse("another-string".equals(authenticator.decryptString(authenticator.getEncryptedData(), authenticator.getInitialisationVector())));
-	}
-
+	public void incorrectPassword() {
+		String stringToEncrypt = "password1";
+		Authenticator authenticator = new Authenticator(new Password("password2"), new AESKey("testtesttesttest"));
+		authenticator.encryptPassword(stringToEncrypt);
+		assertFalse(authenticator.isPasswordCorrect());
+	}	
 }
