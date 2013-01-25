@@ -11,8 +11,7 @@ public class AuthenticatorTest {
 	public void encryptionDecryptionTest() {
 		Password passwordToEncrypt = new Password("HomeAutomation12");
 		Authenticator authenticator = new Authenticator(new Password("HomeAutomation12"));
-		authenticator.encryptPassword(passwordToEncrypt);
-		assertTrue(passwordToEncrypt.getPassword().equals(
-				authenticator.decryptPassword(authenticator.getEncryptedData(), authenticator.getInitialisationVector())));
+		assertTrue(passwordToEncrypt.toString().equals(
+				authenticator.decryptPassword(authenticator.getEncryptedPassword(), authenticator.getInitialisationVector())));
 	}	
 }

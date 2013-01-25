@@ -25,15 +25,18 @@ public class Authenticator {
 		this.password = password;
 		this.encryptedPassword = null;
 		this.initialisationVector = null; 
-		this.key = new SecretKeySpec(password.getPassword().getBytes(), "AES");
+		this.key = new SecretKeySpec(password.toString().getBytes(), "AES");
+		
+		//Encrypt Password
+		encryptPassword(password);
 	}
 
-	public void encryptPassword(Password passwordToEncrypt) {
+	private void encryptPassword(Password passwordToEncrypt) {
 		try {
 			
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
-			encryptedPassword = cipher.doFinal(passwordToEncrypt.getPassword().getBytes());
+			encryptedPassword = cipher.doFinal(passwordToEncrypt.toString().getBytes());
 			initialisationVector = cipher.getIV();
 		
 		} catch (NoSuchAlgorithmException e) {
@@ -75,7 +78,7 @@ public class Authenticator {
         	iv = ivList.get(0).toString().getBytes();
         }
 		
-		if (password.getPassword().equals(
+		if (password.toString().equals(
 				decryptPassword(incomingPassword, iv))) {
 			return true;
 		}
@@ -85,6 +88,7 @@ public class Authenticator {
 		}
 	}
 	
+	// TODO Should be changed to private
 	public String decryptPassword(byte[] encryptedData, byte[] initialisationVector) {
 		byte[] unencryptedData = null;
 		byte[] iv = initialisationVector;
@@ -118,7 +122,7 @@ public class Authenticator {
 		return new String(unencryptedData);
 	}
 	
-	public byte[] getEncryptedData() {
+	public byte[] getEncryptedPassword() {
 		return encryptedPassword;
 	}
 

@@ -7,6 +7,6 @@ import com.pi.relay.PowerControllerImpl;
 
 public class Runner {
     public static void main(String[] args) {
-    	Endpoint.publish("http://localhost:9999/ws/hello", new PowerControllerImpl());
+    	Endpoint.publish("http://localhost:9999/ws/relay", new PowerControllerImpl());
     }   	
 }
