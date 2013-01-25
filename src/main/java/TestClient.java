@@ -32,9 +32,9 @@ public class TestClient{
         Map<String, Object> req_ctx = ((BindingProvider)powerSocket).getRequestContext();
         req_ctx.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, WS_URL);
  
-        Map<String, List<String>> headers = new HashMap<String, List<String>>();
-        headers.put("Password", Collections.singletonList(new String(authentication.getEncryptedPassword())));
-        headers.put("IV", Collections.singletonList(new String(authentication.getInitialisationVector())));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Password", new String(authentication.getEncryptedPassword()));
+        headers.put("IV", new String(authentication.getInitialisationVector()));
         // Test
         System.out.println(headers);
         req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
