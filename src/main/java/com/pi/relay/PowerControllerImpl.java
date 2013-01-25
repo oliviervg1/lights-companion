@@ -42,18 +42,18 @@ public class PowerControllerImpl implements PowerController {
   
     @Override
     public void turnOn() { 
-    	//MessageContext mctx = wsctx.getMessageContext();
-    	//if (authentication.isPasswordCorrect(mctx)) {
+    	MessageContext mctx = wsctx.getMessageContext();
+    	if (authentication.isPasswordCorrect(mctx)) {
     		powerController.high();
-    	//}
+    	}
     }
     
     @Override
     public void turnOff() {
-    	//MessageContext mctx = wsctx.getMessageContext();
-    	//if (authentication.isPasswordCorrect(mctx)) {
+    	MessageContext mctx = wsctx.getMessageContext();
+    	if (authentication.isPasswordCorrect(mctx)) {
     		powerController.low();
-    	//}
+    	}
     }
 }
         
