@@ -33,7 +33,6 @@ public class Authenticator {
 
 	private void encryptPassword(Password passwordToEncrypt) {
 		try {
-			
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 			encryptedPassword = cipher.doFinal(passwordToEncrypt.toString().getBytes());
@@ -58,28 +57,28 @@ public class Authenticator {
 	}
 	
 	// TODO Have better var names!
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("unchecked")
 	public boolean isPasswordCorrect(MessageContext mctx) {
     	//get detail from request headers
-        Map http_headers = (Map) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
-        List passList = (List) http_headers.get("Password");
-        List ivList = (List) http_headers.get("IV");
+        Map<String, List<String>> http_headers = (Map<String, List<String>>) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List<String> passList = http_headers.get("Password");
+        List<String> ivList = http_headers.get("IV");
  
         String incomingPassword = null;
         String iv = null;
         
         if(passList!=null){
         	//get password
-        	incomingPassword = passList.get(0).toString();
+        	incomingPassword = passList.get(0);
         	System.out.println("Incoming password: " + incomingPassword);
         }
         
         if(ivList!=null){
         	//get initialization vector
-        	iv = ivList.get(0).toString();
+        	iv = ivList.get(0);
         	System.out.println("Incoming IV: " + iv);
         }
-		
+        		
 		if (password.toString().equals(
 				decryptPassword(incomingPassword.getBytes(), iv.getBytes()))) {
 			return true;
