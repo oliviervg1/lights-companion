@@ -2,24 +2,17 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.relayClient.raspi.Authenticator.Authenticator;
-import com.relayClient.raspi.Authenticator.Password;
+import automation.api.authenticator.Authenticator;
+import automation.api.authenticator.Password;
 
 public class AuthenticatorTest {
 
 	@Test
-	public void correctPassword() {
+	public void encryptionDecryptionTest() {
 		Password passwordToEncrypt = new Password("HomeAutomation12");
 		Authenticator authenticator = new Authenticator(new Password("HomeAutomation12"));
 		authenticator.encryptPassword(passwordToEncrypt);
-		assertTrue(authenticator.isPasswordCorrect());
-	}
-	
-	@Test
-	public void incorrectPassword() {
-		Password passwordToEncrypt = new Password("HomeAutomation34");
-		Authenticator authenticator = new Authenticator(new Password("HomeAutomation12"));
-		authenticator.encryptPassword(passwordToEncrypt);
-		assertFalse(authenticator.isPasswordCorrect());
+		assertTrue(passwordToEncrypt.getPassword().equals(
+				authenticator.decryptPassword(authenticator.getEncryptedData(), authenticator.getInitialisationVector())));
 	}	
 }

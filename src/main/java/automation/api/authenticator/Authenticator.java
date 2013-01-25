@@ -1,8 +1,10 @@
-package com.relayClient.raspi.Authenticator;
+package automation.api.authenticator;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Map;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -10,7 +12,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
+import javax.xml.ws.handler.MessageContext;
 
 public class Authenticator {
 	
@@ -19,19 +21,11 @@ public class Authenticator {
 	private byte[] initialisationVector;
 	private SecretKeySpec key;
 	
-	// Key has to be 16 bytes long!
 	public Authenticator(Password password) {
 		this.password = password;
 		this.encryptedPassword = null;
-		this.initialisationVector = null;
-		if (password.getPassword().getBytes().length == 16) { 
-			this.key = new SecretKeySpec(password.getPassword().getBytes(), "AES");
-		}
-		else {
-			System.err.println("Password has to be exactly 16 characters long!");
-			System.err.println("Password has been set to default: HomeAutomation12");
-			this.key = new SecretKeySpec("HomeAutomation12".getBytes(), "AES");
-		}
+		this.initialisationVector = null; 
+		this.key = new SecretKeySpec(password.getPassword().getBytes(), "AES");
 	}
 
 	public void encryptPassword(Password passwordToEncrypt) {
@@ -60,17 +54,38 @@ public class Authenticator {
 		}
 	}
 	
-	// TODO change when building client
-	public boolean isPasswordCorrect() {
-		if (password.getPassword().equals(decryptString(getEncryptedData(), getInitialisationVector()))) {
+	// TODO Have better var names!
+	@SuppressWarnings("rawtypes")
+	public boolean isPasswordCorrect(MessageContext mctx) {
+    	//get detail from request headers
+        Map http_headers = (Map) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List passList = (List) http_headers.get("password");
+        List ivList = (List) http_headers.get("iv");
+ 
+        byte[] incomingPassword = null;
+        byte[] iv = null;
+        
+        if(passList!=null){
+        	//get password
+        	incomingPassword = passList.get(0).toString().getBytes();
+        }
+        
+        if(ivList!=null){
+        	//get initialization vector
+        	iv = ivList.get(0).toString().getBytes();
+        }
+		
+		if (password.getPassword().equals(
+				decryptPassword(incomingPassword, iv))) {
 			return true;
 		}
+		
 		else {
 			return false;
 		}
 	}
 	
-	private String decryptString(byte[] encryptedData, byte[] initialisationVector) {
+	public String decryptPassword(byte[] encryptedData, byte[] initialisationVector) {
 		byte[] unencryptedData = null;
 		byte[] iv = initialisationVector;
 		
