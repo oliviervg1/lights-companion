@@ -20,7 +20,7 @@ public class TestClient{
 	public static void main(String[] args) throws Exception {
  
 		URL url = new URL(WS_URL);
-        QName qname = new QName("http://van-goethem.co.uk/", "PowerControllerImplService");
+        QName qname = new QName("http://relay.pi.com/", "PowerControllerImplService");
  
         Service service = Service.create(url, qname);
         PowerController powerSocket = service.getPort(PowerController.class);
