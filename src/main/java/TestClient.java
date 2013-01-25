@@ -25,21 +25,20 @@ public class TestClient{
         Service service = Service.create(url, qname);
         PowerController powerSocket = service.getPort(PowerController.class);
  
-        // TEST
-        Authenticator authentication = new Authenticator(new Password("HomeAutomation12"));
-        
-        /*******************UserName & Password ******************************/
-        Map<String, Object> req_ctx = ((BindingProvider)powerSocket).getRequestContext();
-        req_ctx.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, WS_URL);
- 
-        Map<String, List<String>> headers = new HashMap<String, List<String>>();
-        headers.put("Password", Collections.singletonList(new String(authentication.getEncryptedPassword())));
-        headers.put("IV", Collections.singletonList(new String(authentication.getInitialisationVector())));
-        req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
-        /**********************************************************************/
+//        // TEST
+//        Authenticator authentication = new Authenticator(new Password("HomeAutomation12"));
+//        
+//        /*******************UserName & Password ******************************/
+//        Map<String, Object> req_ctx = ((BindingProvider)powerSocket).getRequestContext();
+//        req_ctx.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, WS_URL);
+// 
+//        Map<String, List<String>> headers = new HashMap<String, List<String>>();
+//        headers.put("Password", Collections.singletonList(new String(authentication.getEncryptedPassword())));
+//        headers.put("IV", Collections.singletonList(new String(authentication.getInitialisationVector())));
+//        req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
+//        /**********************************************************************/
  
         while(true) {
-        	System.out.println("Turn relay on/off?");
         	System.out.println("Turn Relay ON/OFF?");
         	String event = System.console().readLine();
         	
