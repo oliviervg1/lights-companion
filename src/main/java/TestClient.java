@@ -5,7 +5,7 @@ import automation.api.PowerController;
 
 public class TestClient{
  
-	private static final String WS_URL = "http://localhost:9999/ws/relay?wsdl";
+	private static final String WS_URL = "http://192.168.0.9:9999/ws/relay?wsdl";
  
 	public static void main(String[] args) throws Exception {
  
