@@ -57,15 +57,27 @@ public class Authenticator {
 	}
 	
 	// TODO Have better var names!
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public boolean isPasswordCorrect(MessageContext mctx) {
     	//get detail from request headers
-        Map<String, String> http_headers = (Map<String, String>) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
-        String incomingPassword = http_headers.get("Password");;
-        String iv = http_headers.get("IV");
+        Map http_headers = (Map) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List passList = (List) http_headers.get("Password");
+        List ivList = (List) http_headers.get("IV");
+ 
+        String incomingPassword = null;
+        String iv = null;
         
-        System.out.println("Incoming password: " + incomingPassword);
-        System.out.println("Incoming IV: " + iv);
+        if(passList!=null){
+        	//get password
+        	incomingPassword = passList.get(0).toString();
+        	System.out.println("Incoming password: " + incomingPassword);
+        }
+        
+        if(ivList!=null){
+        	//get initialization vector
+        	iv = ivList.get(0).toString();
+        	System.out.println("Incoming IV: " + iv);
+        }
         		
 		if (password.toString().equals(
 				decryptPassword(incomingPassword.getBytes(), iv.getBytes()))) {

@@ -1,14 +1,10 @@
 package com.pi.relay;
 
 import automation.api.PowerController;
-import automation.api.authenticator.Authenticator;
-import automation.api.authenticator.Password;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -22,12 +18,10 @@ public class PowerControllerImpl implements PowerController {
 	@Resource
     WebServiceContext wsctx;
     
-	private Authenticator authentication;
     private GpioController gpio;
     private GpioPinDigitalOutput powerController;
     
     public PowerControllerImpl() { 
-    	authentication = new Authenticator(new Password("HomeAutomation12"));
     	gpio  = GpioFactory.getInstance();
         
         //   GPIO PIN #1 == POWER CONTROLLER
@@ -42,18 +36,12 @@ public class PowerControllerImpl implements PowerController {
   
     @Override
     public void turnOn() { 
-    	MessageContext mctx = wsctx.getMessageContext();
-    	if (authentication.isPasswordCorrect(mctx)) {
-    		powerController.high();
-    	}
+    	powerController.high();
     }
     
     @Override
     public void turnOff() {
-    	MessageContext mctx = wsctx.getMessageContext();
-    	if (authentication.isPasswordCorrect(mctx)) {
-    		powerController.low();
-    	}
+    	powerController.low();
     }
 }
         
