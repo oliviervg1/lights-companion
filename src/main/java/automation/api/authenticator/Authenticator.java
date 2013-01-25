@@ -65,21 +65,23 @@ public class Authenticator {
         List passList = (List) http_headers.get("Password");
         List ivList = (List) http_headers.get("IV");
  
-        byte[] incomingPassword = null;
-        byte[] iv = null;
+        String incomingPassword = null;
+        String iv = null;
         
         if(passList!=null){
         	//get password
-        	incomingPassword = passList.get(0).toString().getBytes();
+        	incomingPassword = passList.get(0).toString();
+        	System.out.println("Incoming password: " + incomingPassword);
         }
         
         if(ivList!=null){
         	//get initialization vector
-        	iv = ivList.get(0).toString().getBytes();
+        	iv = ivList.get(0).toString();
+        	System.out.println("Incoming IV: " + iv);
         }
 		
 		if (password.toString().equals(
-				decryptPassword(incomingPassword, iv))) {
+				decryptPassword(incomingPassword.getBytes(), iv.getBytes()))) {
 			return true;
 		}
 		
