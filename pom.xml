@@ -63,7 +63,7 @@
 		</resources>
 		<plugins>
 		
-			<!-- Unit tests -->
+			<!-- UNIT TESTS -->
   			<plugin>
           		<groupId>org.apache.maven.plugins</groupId>
           		<artifactId>maven-surefire-plugin</artifactId>
@@ -108,6 +108,26 @@
 					</webResources>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-dependency-plugin</artifactId>
+		    <executions>
+		      <execution>
+		        <id>copy-dependencies</id>
+		        <phase>package</phase>
+		        <goals>
+		          <goal>copy-dependencies</goal>
+		        </goals>
+		        <configuration>
+		          <outputDirectory>${basedir}/lib/</outputDirectory>
+		          <overWriteReleases>false</overWriteReleases>
+		          <overWriteSnapshots>false</overWriteSnapshots>
+		          <overWriteIfNewer>true</overWriteIfNewer>
+		        </configuration>
+		      </execution>
+		    </executions>
+		  </plugin>
 
 		</plugins>
 	</build>
