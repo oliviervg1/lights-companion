@@ -1,0 +1,38 @@
+Jan 28, 2013 4:24:38 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: init: Associated with Deployer 'Catalina:type=Deployer,host=localhost'
+Jan 28, 2013 4:24:38 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: init: Global resources are available
+Jan 28, 2013 4:24:38 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:29:19 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: init: Associated with Deployer 'Catalina:type=Deployer,host=localhost'
+Jan 28, 2013 4:29:19 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: init: Global resources are available
+Jan 28, 2013 4:29:19 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:29:51 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: start: Starting web application '/relay-control-1.0.0'
+Jan 28, 2013 4:29:51 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:29:58 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: start: Starting web application '/relay-control-1.0.0'
+Jan 28, 2013 4:29:58 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:30:09 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: start: Starting web application '/relay-control-1.0.0'
+Jan 28, 2013 4:30:09 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:31:28 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: undeploy: Undeploying web application at '/relay-control-1.0.0'
+Jan 28, 2013 4:31:28 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:31:54 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:31:57 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: start: Starting web application '/relay-control-1.0.0'
+Jan 28, 2013 4:31:57 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
+Jan 28, 2013 4:32:08 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: undeploy: Undeploying web application at '/relay-control-1.0.0'
+Jan 28, 2013 4:32:08 PM org.apache.catalina.core.ApplicationContext log
+INFO: HTMLManager: list: Listing contexts for virtual host 'localhost'
