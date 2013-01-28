@@ -1,4 +1,4 @@
-package automation.api;
+package automation.api.interfaces;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -8,7 +8,7 @@ import javax.jws.soap.SOAPBinding.Style;
 //Service Endpoint Interface
 @WebService
 @SOAPBinding(style = Style.RPC)
-public interface PowerController {
+public interface PowerControllerIface {
 	 
 	@WebMethod void turnOn();
 	@WebMethod void turnOff();

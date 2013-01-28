@@ -1,6 +1,6 @@
-package com.pi.relay;
+package automation.api.devices;
 
-import automation.api.PowerController;
+import automation.api.interfaces.PowerControllerIface;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
@@ -13,15 +13,15 @@ import com.pi4j.io.gpio.RaspiPin;
 
 //Service Implementation Bean
 @WebService(endpointInterface = "automation.api.PowerController")
-public class PowerControllerImpl implements PowerController {
+public abstract class PowerController implements PowerControllerIface {
 	
 	@Resource
     WebServiceContext wsctx;
     
-    private GpioController gpio;
-    private GpioPinDigitalOutput powerController;
+    protected GpioController gpio;
+    protected GpioPinDigitalOutput powerController;
     
-    public PowerControllerImpl() { 
+    public PowerController() { 
     	gpio  = GpioFactory.getInstance();
         
         //   GPIO PIN #1 == POWER CONTROLLER
@@ -35,13 +35,9 @@ public class PowerControllerImpl implements PowerController {
     }
   
     @Override
-    public void turnOn() { 
-    	powerController.high();
-    }
+    abstract public void turnOn();
     
     @Override
-    public void turnOff() {
-    	powerController.low();
-    }
+    abstract public void turnOff();
 }
         
