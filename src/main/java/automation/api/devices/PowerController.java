@@ -18,7 +18,7 @@ public abstract class PowerController implements PowerControllerIface {
 	@Resource
     WebServiceContext wsctx;
     
-    protected GpioController gpio;
+    private GpioController gpio;
     protected GpioPinDigitalOutput powerController;
     
     public PowerController() { 
