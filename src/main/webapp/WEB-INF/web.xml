@@ -12,15 +12,15 @@
                 </listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>relay</servlet-name>
+		<servlet-name>SocketController</servlet-name>
 		<servlet-class>
 			com.sun.xml.ws.transport.http.servlet.WSServlet
                 </servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>relay</servlet-name>
-		<url-pattern>/relay</url-pattern>
+		<servlet-name>SocketController</servlet-name>
+		<url-pattern>/SocketController</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
