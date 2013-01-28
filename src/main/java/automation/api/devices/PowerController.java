@@ -12,7 +12,7 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 //Service Implementation Bean
-@WebService(endpointInterface = "automation.api.PowerController")
+@WebService(endpointInterface = "automation.api.interfaces.PowerControllerIface")
 public abstract class PowerController implements PowerControllerIface {
 	
 	@Resource
