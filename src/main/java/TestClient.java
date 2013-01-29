@@ -2,7 +2,7 @@ import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
-import automation.api.interfaces.PowerControllerIface;
+import automation.api.interfaces.ConnectedDevice;
 
 public class TestClient{
  
@@ -14,17 +14,17 @@ public class TestClient{
         QName qname = new QName("http://relay.pi.com/", "SocketControllerService");
  
         Service service = Service.create(url, qname);
-        PowerControllerIface powerSocket = service.getPort(PowerControllerIface.class);
+        ConnectedDevice powerSocket = service.getPort(ConnectedDevice.class);
  
         while(true) {
         	System.out.println("Turn Relay ON/OFF?");
         	String event = System.console().readLine();
         	
         	if (event.equalsIgnoreCase("on")) {
-        		powerSocket.turnOn();
+        		powerSocket.processInput("powerOn()");
         	}
         	if (event.equalsIgnoreCase("off")) {
-        		powerSocket.turnOff();
+        		powerSocket.processInput("powerOff()");
         	}
         } 
     }
