@@ -13,6 +13,8 @@ public class SocketController extends AbstractDevice {
 	@Override
 	protected void onStartup() {
 		relay = new RelaySwitch();
+		addMethod("turnOn()");
+		addMethod("turnOff()");
 	}
 
 	@Override
