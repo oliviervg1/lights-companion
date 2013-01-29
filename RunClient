@@ -3,4 +3,4 @@
 #
 
 cd target/
-sudo java -classpath classes:./'*' Runner
+sudo java -classpath classes:./'*' TestClient

@@ -6,7 +6,7 @@ import automation.api.interfaces.PowerControllerIface;
 
 public class TestClient{
  
-	private static final String WS_URL = "http://192.168.0.9:9999/ws/SocketController?wsdl";
+	private static final String WS_URL = "http://192.168.0.9:8080/relay-control-1.0.0/SocketController?wsdl";
  
 	public static void main(String[] args) throws Exception {
  
