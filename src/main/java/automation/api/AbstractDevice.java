@@ -21,10 +21,15 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	protected abstract void onStartup();
 	
 	@Override
-	final public void processInput(String methodName) {
+	final public void processInput(String methodName, Object[] parameters) {
 		try {
-			method = this.getClass().getMethod(methodName);
-			method.invoke(this.getClass().newInstance());
+			if (parameters == null || parameters.length == 0) {
+				method = this.getClass().getMethod(methodName);
+			}
+			else {
+				method = this.getClass().getMethod(methodName, findParameterTypes(parameters));
+			}
+			method.invoke(this.getClass().newInstance(), parameters);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,5 +49,14 @@ public abstract class AbstractDevice implements ConnectedDevice{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	final private Class[] findParameterTypes(Object[] parameters) {
+		Class[] parameterTypes = new Class[parameters.length];
+		for (int i=0; i<parameters.length; i++) {
+			parameterTypes[i] = parameters[i].getClass();
+		}
+		return parameterTypes;
 	}
 }
