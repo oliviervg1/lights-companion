@@ -27,7 +27,7 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	
 	@Override
 	final public Object processInput(String methodName, Object[] parametersArray) {
-		Object ret = null;
+		Object ret = 0;
 		
 		try {
 			
@@ -39,6 +39,9 @@ public abstract class AbstractDevice implements ConnectedDevice{
 			}
 			
 			ret = method.invoke(this.getClass(), parametersArray);
+			if (ret == null) {
+				ret = 0;
+			}
 		
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
