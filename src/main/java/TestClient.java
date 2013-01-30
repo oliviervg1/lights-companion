@@ -6,7 +6,7 @@ import automation.api.interfaces.ConnectedDevice;
 
 public class TestClient{
  
-	private static final String WS_URL = "http://192.168.0.9:8080/relay-control-1.0.0/SocketController?wsdl";
+	private static final String WS_URL = "http://localhost:8080/relay-control-1.0.0/SocketController?wsdl";
  
 	public static void main(String[] args) throws Exception {
  

@@ -17,11 +17,12 @@ public class SocketController extends AbstractDevice {
 	
 	public void powerOn() {
 		//relay.turnOn();
-		System.out.println("IT WORKS!");
+		System.out.println("ON!");
 	}
 	
 	public void powerOff() {
 		//relay.turnOff();
+		System.out.println("OFF!");
 	}
 	
 }

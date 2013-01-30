@@ -2,6 +2,7 @@ package automation.api;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import javax.jws.WebService;
 import automation.api.interfaces.ConnectedDevice;
 
@@ -20,7 +21,7 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	protected abstract void onStartup();
 	
 	@Override
-	public void processInput(String methodName) {
+	final public void processInput(String methodName) {
 		try {
 			method = this.getClass().getMethod(methodName);
 			method.invoke(this.getClass().newInstance());
