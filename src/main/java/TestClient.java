@@ -17,7 +17,7 @@ public class TestClient{
         ConnectedDevice powerSocket = service.getPort(ConnectedDevice.class);
  
         while(true) {
-        	System.out.println("Turn Relay ON/OFF?");
+        	System.out.println("Turn Relay ON/OFF or get STATE?");
         	String event = System.console().readLine();
         	
         	if (event.equalsIgnoreCase("on")) {
@@ -25,6 +25,9 @@ public class TestClient{
         	}
         	if (event.equalsIgnoreCase("off")) {
         		powerSocket.processInput("powerOff");
+        	}
+        	if (event.equalsIgnoreCase("state")) {
+        		System.out.println(powerSocket.processInput("getState"));
         	}
         } 
     }

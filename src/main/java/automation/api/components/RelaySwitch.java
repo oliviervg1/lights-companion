@@ -35,5 +35,14 @@ public class RelaySwitch implements Switch {
     public void turnOff() {
     	powerSwitch.low();
     }
+    
+    public String getState() {
+    	if (powerSwitch.isHigh()) {
+    		return "On";
+    	}
+    	else {
+    		return "Off";
+    	}
+    }
 }
         
