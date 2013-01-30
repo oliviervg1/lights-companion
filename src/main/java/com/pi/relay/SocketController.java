@@ -8,22 +8,22 @@ import automation.api.components.RelaySwitch;
 @WebService(endpointInterface = "automation.api.interfaces.ConnectedDevice")
 public class SocketController extends AbstractDevice {
 	
-	private RelaySwitch relay;
+	private static RelaySwitch relay;
 	
 	@Override
 	protected void onStartup() {
 		relay = new RelaySwitch();
 	}
 	
-	public void powerOn() {
+	static public void powerOn() {
 		relay.turnOn();
 	}
 	
-	public void powerOff() {
+	static public void powerOff() {
 		relay.turnOff();
 	}
 	
-	public String getState() {
+	static public String getState() {
 		return relay.getState();
 	}
 }

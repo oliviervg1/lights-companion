@@ -38,7 +38,7 @@ public abstract class AbstractDevice implements ConnectedDevice{
 				method = this.getClass().getMethod(methodName, findParameterTypes(parametersArray));
 			}
 			
-			ret = method.invoke(this.getClass().newInstance(), parametersArray);
+			ret = method.invoke(this.getClass(), parametersArray);
 		
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -55,10 +55,7 @@ public abstract class AbstractDevice implements ConnectedDevice{
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		
 		return ret;
 	}
