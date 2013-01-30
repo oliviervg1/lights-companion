@@ -10,6 +10,7 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.RPC)
 public interface ConnectedDevice {
 	
-	@WebMethod void processInput(String methodName, Object[] parametersArray);
+	@WebMethod(operationName="noParameters") void processInput(String methodName);
+	@WebMethod(operationName="withParameters") void processInput(String methodName, Object[] parametersArray);
 	
 }

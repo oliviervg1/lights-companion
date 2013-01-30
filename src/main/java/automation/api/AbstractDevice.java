@@ -21,6 +21,11 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	protected abstract void onStartup();
 	
 	@Override
+	final public void processInput(String methodName) {
+		processInput(methodName, null);
+	}
+	
+	@Override
 	final public void processInput(String methodName, Object[] parametersArray) {
 		try {
 			if (parametersArray == null || parametersArray.length == 0) {

@@ -11,6 +11,6 @@ public class ReflectionTest {
 
     @Test
     public void testGetMethod() {
-    	socketController.processInput(methodName, null);
+    	socketController.processInput(methodName);
     }
 }

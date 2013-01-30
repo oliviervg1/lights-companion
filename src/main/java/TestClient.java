@@ -21,10 +21,10 @@ public class TestClient{
         	String event = System.console().readLine();
         	
         	if (event.equalsIgnoreCase("on")) {
-        		powerSocket.processInput("powerOn", null);
+        		powerSocket.processInput("powerOn");
         	}
         	if (event.equalsIgnoreCase("off")) {
-        		powerSocket.processInput("powerOff", null);
+        		powerSocket.processInput("powerOff");
         	}
         } 
     }
