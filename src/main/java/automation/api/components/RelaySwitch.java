@@ -10,20 +10,24 @@ import com.pi4j.io.gpio.RaspiPin;
 
 public class RelaySwitch implements Switch {
     
-    private GpioController gpio;
-    private GpioPinDigitalOutput powerSwitch;
+    private static GpioController gpio;
+    private static GpioPinDigitalOutput powerSwitch;
     
     public RelaySwitch() { 
-    	gpio  = GpioFactory.getInstance();
+    	if (gpio == null) {
+    		gpio  = GpioFactory.getInstance();
+    	}
         
-        //   GPIO PIN #1 == POWER CONTROLLER
-        powerSwitch = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PowerSwitch");
-        
-        // force power controller to OFF if the program is shutdown
-        powerSwitch.setShutdownOptions(true,PinState.LOW);
-        
-        // default to off
-        powerSwitch.low();
+    	if (powerSwitch == null) {
+	        //   GPIO PIN #1 == POWER CONTROLLER
+	        powerSwitch = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PowerSwitch");
+	        
+	        // force power controller to OFF if the program is shutdown
+	        powerSwitch.setShutdownOptions(true,PinState.LOW);
+	        
+	        // default to off
+	        powerSwitch.low();
+    	}
     }
   
     @Override
