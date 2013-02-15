@@ -21,47 +21,34 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	protected abstract void onStartup();
 	
 	@Override
-	final public Object processInput(String methodName) {
+	final public Object processInput(String methodName) throws NoSuchMethodException {
 		return processInput(methodName, null);
 	}
 	
 	@Override
-	final public Object processInput(String methodName, Object[] parametersArray) {
+	final public Object processInput(String methodName, Object[] parametersArray) throws NoSuchMethodException {
 		Object ret = 0;
 		
 		try {
 			
 			if (parametersArray == null || parametersArray.length == 0) {
-				method = this.getClass().getMethod(methodName);
+				method = this.getClass().getDeclaredMethod(methodName);
 			}
 			else {
-				method = this.getClass().getMethod(methodName, findParameterTypes(parametersArray));
+				method = this.getClass().getDeclaredMethod(methodName, findParameterTypes(parametersArray));
 			}
+						
+			ret = method.invoke(this, parametersArray);
 			
-			ret = method.invoke(this.getClass().newInstance(), parametersArray);
+			// Cannot pass null over SOAP, so force to 0 if method has set ret to null
 			if (ret == null) {
 				ret = 0;
 			}
-		
-		} catch (SecurityException e) {
+						
+		} catch (SecurityException | IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		}   
 		
 		return ret;
 	}
