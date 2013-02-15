@@ -17,9 +17,7 @@ public class AbstractDeviceTest {
 			device.invokeMethod("setCounterToOne");
 		} catch (NoSuchMethodException e) { 
 			fail("No such method");
-		} catch (IllegalArgumentException e) {
-			fail("Illegal arguments");
-		}
+		} 
 		assertTrue(device.getCounter().equals(new Integer(1)));
     }
 	
@@ -30,9 +28,7 @@ public class AbstractDeviceTest {
     		device.invokeMethod("setCounter", param);
     	} catch (NoSuchMethodException e) { 
 			fail("No such method");
-		} catch (IllegalArgumentException e) {
-			fail("Illegal arguments");
-		}
+		} 
 		assertTrue(device.getCounter().equals(new Integer(2)));
     }
     
@@ -43,9 +39,7 @@ public class AbstractDeviceTest {
     		test = (Integer) device.invokeMethod("getCounter");
     	} catch (NoSuchMethodException e) { 
 			fail("No such method");
-		} catch (IllegalArgumentException e) {
-			fail("Illegal arguments");
-		}
+		} 
 		assertTrue(test.equals(device.getCounter()));
     }
     
