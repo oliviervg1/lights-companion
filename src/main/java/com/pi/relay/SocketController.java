@@ -11,7 +11,7 @@ public class SocketController extends AbstractDevice {
 	private RelaySwitch relay;
 	
 	@Override
-	protected void onStartup() {
+	final protected void onStartup() {
 		relay = new RelaySwitch();
 	}
 	

@@ -7,7 +7,7 @@ public class DummyAbstractDevice extends AbstractDevice {
 	private Integer counter;
 	
 	@Override
-	protected void onStartup() {
+	final protected void onStartup() {
 		counter = 0;
 	}
 	
