@@ -14,7 +14,7 @@ public class AbstractDeviceTest {
 	@Test
     public void InvokeMethod() {
 		try {
-			device.processInput("setCounterToOne");
+			device.invokeMethod("setCounterToOne");
 		} catch (NoSuchMethodException e) { 
 			fail("No such method");
 		} catch (IllegalArgumentException e) {
@@ -27,7 +27,7 @@ public class AbstractDeviceTest {
     public void InvokeMethodWithParameters() {
     	Object[] param = {new Integer(2)};
     	try {
-    		device.processInput("setCounter", param);
+    		device.invokeMethod("setCounter", param);
     	} catch (NoSuchMethodException e) { 
 			fail("No such method");
 		} catch (IllegalArgumentException e) {
@@ -40,7 +40,7 @@ public class AbstractDeviceTest {
     public void InvokeMethodWithReturn() {
     	Integer test = null;
     	try {
-    		test = (Integer) device.processInput("getCounter");
+    		test = (Integer) device.invokeMethod("getCounter");
     	} catch (NoSuchMethodException e) { 
 			fail("No such method");
 		} catch (IllegalArgumentException e) {
@@ -51,6 +51,6 @@ public class AbstractDeviceTest {
     
 	@Test(expected = NoSuchMethodException.class)
 	public void InvokeNonExistingMethod() throws NoSuchMethodException {
-		device.processInput("NonExistingMethod");
+		device.invokeMethod("NonExistingMethod");
 	}
 }

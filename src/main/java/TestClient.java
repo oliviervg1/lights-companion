@@ -21,13 +21,13 @@ public class TestClient{
         	String event = System.console().readLine();
         	
         	if (event.equalsIgnoreCase("on")) {
-        		powerSocket.processInput("powerOn");
+        		powerSocket.invokeMethod("powerOn");
         	}
         	if (event.equalsIgnoreCase("off")) {
-        		powerSocket.processInput("powerOff");
+        		powerSocket.invokeMethod("powerOff");
         	}
         	if (event.equalsIgnoreCase("state")) {
-        		System.out.println(powerSocket.processInput("getState"));
+        		System.out.println(powerSocket.invokeMethod("getState"));
         	}
         } 
     }

@@ -21,12 +21,12 @@ public abstract class AbstractDevice implements ConnectedDevice{
 	protected abstract void onStartup();
 	
 	@Override
-	final public Object processInput(String methodName) throws NoSuchMethodException {
-		return processInput(methodName, null);
+	final public Object invokeMethod(String methodName) throws NoSuchMethodException {
+		return invokeMethod(methodName, null);
 	}
 	
 	@Override
-	final public Object processInput(String methodName, Object[] parametersArray) throws NoSuchMethodException {
+	final public Object invokeMethod(String methodName, Object[] parametersArray) throws NoSuchMethodException {
 		Object ret = 0;
 		
 		try {
