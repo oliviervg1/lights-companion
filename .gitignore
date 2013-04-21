@@ -1,3 +1,10 @@
+
+.classpath
+
+.project
+
+*.prefs
+
 *.class
 
 # Package Files #
