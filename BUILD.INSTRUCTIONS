@@ -1,7 +1,0 @@
---------------------
-PROJECT BUILD
---------------------
-
-Use the following command to build this project:
-
-> mvn clean package
