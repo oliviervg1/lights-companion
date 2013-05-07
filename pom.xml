@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- MAVEN ARTIFACT INFORMATION -->
-	<groupId>com.relayClient.raspi</groupId>
-	<artifactId>relay-control</artifactId>
+	<groupId>com.pi.automation</groupId>
+	<artifactId>lights-companion</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	<name>Raspberry Pi - Power Controller</name>
-	<description>Raspberry Pi - Power Controller</description>
+	<name>Lights Companion App</name>
+	<description>Raspberry Pi - Relay Controller</description>
 
 	<!-- BUILD PROPERTIES -->
 	<properties>
