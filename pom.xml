@@ -22,34 +22,20 @@
 	<!-- DEPENDENCIES -->
 	<repositories>
 		<repository>
-			<id>oss-snapshots-repo</id>
-			<name>Sonatype OSS Maven Repository</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
+        	<id>com.pi.automation</id>
+            <name>automation-api</name>
+            <url>https://raw.github.com/oliviervg1/automation-api/releases</url>
+            <releases>
+            	<updatePolicy>always</updatePolicy>
+            </releases>
+    	</repository>
 	</repositories>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.pi4j</groupId>
-			<artifactId>pi4j-core</artifactId>
-			<version>0.0.5</version>
-		</dependency>
-		
-		<dependency>
-      		<groupId>junit</groupId>
-     		<artifactId>junit</artifactId>
-      		<version>4.8.1</version>
-     		<scope>test</scope>
-   		</dependency>
-		
-		<dependency>
-  			<groupId>org.jmock</groupId>
-  			<artifactId>jmock-junit4</artifactId>
-  			<version>2.6.0-RC2</version>
+			<groupId>com.pi.automation</groupId>
+			<artifactId>automation-api</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
