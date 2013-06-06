@@ -3,4 +3,4 @@
 #
 
 cd target/
-sudo java -classpath classes:./'*' TestClient
+sudo java -classpath classes/:classes/automation-api-1.0.0.jar TestClient
